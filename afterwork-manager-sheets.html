@@ -609,7 +609,7 @@ function openAdd() {
   document.getElementById("edit-panel").style.display="block";
 }
 function openEdit(id) {
-  const p=people.find(x=>x.id===id);
+  const p=people.find(x=>String(x.id)===String(id));
   if(!p){ alert("Nicht gefunden: "+id); return; }
   editId=id;
   document.getElementById("modal-title").textContent="Bearbeiten";
