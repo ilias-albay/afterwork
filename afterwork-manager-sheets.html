@@ -74,8 +74,8 @@ tbody tr:hover td{background:rgba(255,255,255,.02)}
 .status-sel{background:none;border:none;cursor:pointer;font-size:11px;font-weight:500;padding:3px 6px;border-radius:20px;outline:none}
 .bulk-bar{display:none;align-items:center;gap:10px;padding:10px 14px;background:var(--accent-dim);border:1px solid rgba(200,240,106,.2);border-radius:var(--radius);margin-bottom:12px;font-size:13px}
 .bulk-bar.show{display:flex}
-.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;align-items:flex-start;justify-content:center;padding-top:60px;overflow-y:auto}
-.overlay.open{display:flex}
+.overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;width:100%;height:100%;background:rgba(0,0,0,.7);z-index:9999;align-items:center;justify-content:center}
+.overlay.open{display:flex!important}
 .modal{background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius-lg);padding:24px;width:420px;max-width:95vw;max-height:90vh;overflow-y:auto}
 .modal-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
 .modal-hd h3{font-size:15px;font-weight:500}
@@ -608,24 +608,33 @@ async function applyBulk() {
 // ── MODAL ─────────────────────────────────────────────
 function openAdd() {
   editId=null;
-  document.getElementById('modal-title').textContent='Person hinzufügen';
-  ['name','email','tel','team','notiz'].forEach(f=>document.getElementById('f-'+f).value='');
-  document.getElementById('f-status').value='Eingeladen';
-  document.getElementById('overlay').classList.add('open');
+  document.getElementById("modal-title").textContent="Person hinzufuegen";
+  ["name","email","tel","team","notiz"].forEach(f=>document.getElementById("f-"+f).value="");
+  document.getElementById("f-status").value="Eingeladen";
+  const ov = document.getElementById("overlay");
+  ov.style.display = "flex";
+  ov.classList.add("open");
 }
 function openEdit(id) {
-  const p=people.find(x=>x.id===id); if(!p)return;
+  const p=people.find(x=>x.id===id);
+  if(!p){ alert("Person nicht gefunden: "+id); return; }
   editId=id;
-  document.getElementById('modal-title').textContent='Bearbeiten';
-  document.getElementById('f-name').value=p.name;
-  document.getElementById('f-email').value=p.email||'';
-  document.getElementById('f-tel').value=p.tel||'';
-  document.getElementById('f-team').value=p.team||'';
-  document.getElementById('f-status').value=p.status;
-  document.getElementById('f-notiz').value=p.notiz||'';
-  document.getElementById('overlay').classList.add('open');
+  document.getElementById("modal-title").textContent="Bearbeiten";
+  document.getElementById("f-name").value=p.name||"";
+  document.getElementById("f-email").value=p.email||"";
+  document.getElementById("f-tel").value=p.tel||"";
+  document.getElementById("f-team").value=p.team||"";
+  document.getElementById("f-status").value=p.status||"Eingeladen";
+  document.getElementById("f-notiz").value=p.notiz||"";
+  const ov = document.getElementById("overlay");
+  ov.style.display = "flex";
+  ov.classList.add("open");
 }
-function closeModal() { document.getElementById('overlay').classList.remove('open'); }
+function closeModal() {
+  const ov = document.getElementById("overlay");
+  ov.style.display = "none";
+  ov.classList.remove("open");
+}
 
 async function savePerson() {
   const name=document.getElementById('f-name').value.trim();
