@@ -2,105 +2,147 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Afterwork Manager – Works Out</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Afterwork – Works Out</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0f0f0f;--surface:#181818;--surface2:#222;--border:rgba(255,255,255,.08);--border2:rgba(255,255,255,.14);--text:#f0f0f0;--text2:#888;--text3:#555;--accent:#c8f06a;--accent-dim:rgba(200,240,106,.12);--green:#4ade80;--green-bg:rgba(74,222,128,.1);--amber:#fbbf24;--amber-bg:rgba(251,191,36,.1);--red:#f87171;--red-bg:rgba(248,113,113,.1);--blue:#60a5fa;--blue-bg:rgba(96,165,250,.1);--teal:#2dd4bf;--teal-bg:rgba(45,212,191,.1);--radius:8px;--radius-lg:12px}
-*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0f0f0f;--surface:#181818;--surface2:#222;--border:rgba(255,255,255,.08);--border2:rgba(255,255,255,.18);--text:#f0f0f0;--text2:#888;--text3:#555;--accent:#c8f06a;--accent-dim:rgba(200,240,106,.12);--green:#4ade80;--green-bg:rgba(74,222,128,.1);--amber:#fbbf24;--amber-bg:rgba(251,191,36,.1);--red:#f87171;--red-bg:rgba(248,113,113,.1);--blue:#60a5fa;--blue-bg:rgba(96,165,250,.1);--teal:#2dd4bf;--teal-bg:rgba(45,212,191,.1);--r:8px;--rl:12px}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:14px}
-.shell{display:flex;min-height:100vh}
-.sidebar{width:220px;min-width:220px;background:var(--surface);border-right:1px solid var(--border);padding:24px 0;display:flex;flex-direction:column}
-.sidebar-logo{padding:0 20px 24px;border-bottom:1px solid var(--border);margin-bottom:16px}
-.logo-tag{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);margin-bottom:4px;font-family:'DM Mono',monospace}
-.logo-name{font-size:18px;font-weight:600;color:var(--accent);line-height:1.2}
-.nav{padding:0 12px;flex:1}
-.nav-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:var(--radius);cursor:pointer;color:var(--text2);font-size:13px;border:none;background:none;width:100%;text-align:left;transition:all .15s;margin-bottom:2px}
-.nav-item:hover{background:var(--surface2);color:var(--text)}
-.nav-item.active{background:var(--accent-dim);color:var(--accent);font-weight:500}
-.sidebar-stats{padding:16px 20px;border-top:1px solid var(--border);margin-top:auto}
-.ss-label{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;font-family:'DM Mono',monospace}
-.ss-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;font-size:12px}
-.ss-dot{width:6px;height:6px;border-radius:50%;display:inline-block;margin-right:6px}
-.main{flex:1;display:flex;flex-direction:column;overflow:hidden}
-.topbar{padding:18px 28px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:var(--surface)}
-.page-title{font-size:16px;font-weight:500}
-.page-sub{font-size:12px;color:var(--text2);margin-top:1px}
-.sync-indicator{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text3);padding:6px 10px;border-radius:var(--radius);border:1px solid var(--border)}
-.sync-dot{width:7px;height:7px;border-radius:50%;background:var(--text3)}
-.sync-dot.ok{background:var(--green)}
-.sync-dot.syncing{background:var(--amber);animation:pulse .8s infinite}
-.sync-dot.error{background:var(--red)}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-.content{padding:24px 28px;flex:1;overflow-y:auto}
-.kpi-row{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;margin-bottom:24px}
-.kpi{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:14px 16px}
-.kpi-label{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px;font-family:'DM Mono',monospace}
-.kpi-val{font-size:26px;font-weight:600;line-height:1}
-.toolbar{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;align-items:center}
-input,select,textarea{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;padding:8px 12px;outline:none;transition:border-color .15s}
+input,select,textarea{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r);color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;padding:10px 12px;outline:none;transition:border-color .15s;-webkit-appearance:none}
 input:focus,select:focus,textarea:focus{border-color:var(--border2)}
 input::placeholder,textarea::placeholder{color:var(--text3)}
-select{cursor:pointer}
+select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:30px}
 select option{background:var(--surface2)}
-.search-wrap{position:relative;flex:1;min-width:180px;max-width:280px}
-.search-wrap input{width:100%;padding-left:34px}
-.search-icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--text3);font-size:14px;pointer-events:none}
-.btn{padding:8px 14px;border-radius:var(--radius);border:1px solid var(--border);background:var(--surface2);color:var(--text2);font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;transition:all .15s;white-space:nowrap;display:inline-flex;align-items:center;gap:6px}
-.btn:hover{border-color:var(--border2);color:var(--text)}
+.btn{padding:10px 16px;border-radius:var(--r);border:1px solid var(--border);background:var(--surface2);color:var(--text2);font-family:'DM Sans',sans-serif;font-size:13px;cursor:pointer;transition:all .15s;white-space:nowrap;display:inline-flex;align-items:center;gap:6px;touch-action:manipulation}
+.btn:active{opacity:.7}
 .btn.primary{background:var(--accent);color:#0f0f0f;border-color:transparent;font-weight:500}
-.btn.primary:hover{opacity:.9}
-.btn.sm{padding:5px 10px;font-size:12px}
-.btn.ghost{border-color:transparent;background:transparent}
-.btn.ghost:hover{background:var(--surface2)}
+.btn.sm{padding:6px 12px;font-size:12px}
+.btn.ghost{border-color:transparent;background:transparent;color:var(--text2)}
 .btn:disabled{opacity:.35;cursor:default}
-.table-wrap{border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden}
-table{width:100%;border-collapse:collapse;font-size:13px}
-thead{background:var(--surface)}
-th{text-align:left;padding:10px 14px;color:var(--text3);font-weight:400;font-size:11px;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--border);white-space:nowrap}
-td{padding:10px 14px;border-bottom:1px solid var(--border);vertical-align:middle}
-tbody tr:last-child td{border-bottom:none}
-tbody tr:hover td{background:rgba(255,255,255,.02)}
-.td-name{font-weight:500}
-.td-muted{color:var(--text2);font-size:12px}
-.td-mono{font-family:'DM Mono',monospace;font-size:11px;color:var(--text2)}
-.badge{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:500;white-space:nowrap}
+.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:20px;font-size:11px;font-weight:500;white-space:nowrap}
 .badge::before{content:'';width:5px;height:5px;border-radius:50%}
 .b-eingeladen{background:var(--blue-bg);color:var(--blue)}.b-eingeladen::before{background:var(--blue)}
 .b-zugesagt{background:var(--green-bg);color:var(--green)}.b-zugesagt::before{background:var(--green)}
 .b-abgesagt{background:var(--red-bg);color:var(--red)}.b-abgesagt::before{background:var(--red)}
 .b-warteliste{background:var(--amber-bg);color:var(--amber)}.b-warteliste::before{background:var(--amber)}
 .b-erschienen{background:var(--teal-bg);color:var(--teal)}.b-erschienen::before{background:var(--teal)}
-.status-sel{background:none;border:none;cursor:pointer;font-size:11px;font-weight:500;padding:3px 6px;border-radius:20px;outline:none}
-.bulk-bar{display:none;align-items:center;gap:10px;padding:10px 14px;background:var(--accent-dim);border:1px solid rgba(200,240,106,.2);border-radius:var(--radius);margin-bottom:12px;font-size:13px}
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--surface);border:1px solid var(--border2);border-radius:var(--r);padding:10px 18px;font-size:13px;z-index:9999;opacity:0;transition:all .25s;pointer-events:none;white-space:nowrap}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* ── DESKTOP ── */
+@media(min-width:768px){
+  .shell{display:flex;min-height:100vh}
+  .sidebar{width:220px;min-width:220px;background:var(--surface);border-right:1px solid var(--border);padding:24px 0;display:flex;flex-direction:column;position:fixed;top:0;left:0;height:100vh}
+  .mobile-nav{display:none}
+  .main{margin-left:220px;flex:1;display:flex;flex-direction:column;min-height:100vh}
+  .topbar{padding:16px 28px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:var(--surface);position:sticky;top:0;z-index:10}
+  .content{padding:24px 28px}
+  .kpi-row{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-bottom:20px}
+  .card-list{display:none}
+  .table-wrap{display:block;border:1px solid var(--border);border-radius:var(--rl);overflow:hidden}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  thead{background:var(--surface)}
+  th{text-align:left;padding:10px 14px;color:var(--text3);font-weight:400;font-size:11px;text-transform:uppercase;letter-spacing:.06em;border-bottom:1px solid var(--border);white-space:nowrap}
+  td{padding:10px 14px;border-bottom:1px solid var(--border);vertical-align:middle}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr:hover td{background:rgba(255,255,255,.02)}
+  .topbar-actions{display:flex;gap:8px;align-items:center}
+  .page-sub{display:block}
+}
+
+/* ── MOBILE ── */
+@media(max-width:767px){
+  .sidebar{display:none}
+  .main{display:flex;flex-direction:column;min-height:100vh;padding-bottom:70px}
+  .topbar{padding:14px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:var(--surface);position:sticky;top:0;z-index:10}
+  .content{padding:16px}
+  .kpi-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:16px}
+  .kpi-val{font-size:20px}
+  .card-list{display:block}
+  .table-wrap{display:none}
+  .page-sub{display:none}
+  .topbar-actions .sync-indicator span:last-child{display:none}
+  .search-wrap{max-width:100%!important}
+  .toolbar{flex-direction:column;align-items:stretch}
+  .toolbar .search-wrap,.toolbar select{width:100%}
+  .mobile-nav{position:fixed;bottom:0;left:0;right:0;background:var(--surface);border-top:1px solid var(--border);display:flex;z-index:100;height:62px}
+  .mob-nav-item{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;color:var(--text3);font-size:10px;border:none;background:none;padding:8px 4px;touch-action:manipulation}
+  .mob-nav-item.active{color:var(--accent)}
+  .mob-nav-icon{font-size:18px;line-height:1}
+}
+
+/* ── SHARED ── */
+.sidebar-logo{padding:0 20px 24px;border-bottom:1px solid var(--border);margin-bottom:16px}
+.logo-tag{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--text3);margin-bottom:4px;font-family:'DM Mono',monospace}
+.logo-name{font-size:18px;font-weight:600;color:var(--accent);line-height:1.2}
+.nav{padding:0 12px;flex:1}
+.nav-item{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:var(--r);cursor:pointer;color:var(--text2);font-size:13px;border:none;background:none;width:100%;text-align:left;transition:all .15s;margin-bottom:2px}
+.nav-item:hover{background:var(--surface2);color:var(--text)}
+.nav-item.active{background:var(--accent-dim);color:var(--accent);font-weight:500}
+.sidebar-stats{padding:16px 20px;border-top:1px solid var(--border);margin-top:auto}
+.ss-label{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;font-family:'DM Mono',monospace}
+.ss-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;font-size:12px}
+.ss-dot{width:6px;height:6px;border-radius:50%;display:inline-block;margin-right:6px}
+.page-title{font-size:15px;font-weight:500}
+.sync-indicator{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text3);padding:6px 10px;border-radius:var(--r);border:1px solid var(--border)}
+.sync-dot{width:7px;height:7px;border-radius:50%;background:var(--text3)}
+.sync-dot.ok{background:var(--green)}
+.sync-dot.syncing{background:var(--amber);animation:pulse .8s infinite}
+.sync-dot.error{background:var(--red)}
+.kpi{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:12px 14px}
+.kpi-label{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:4px;font-family:'DM Mono',monospace}
+.kpi-val{font-size:22px;font-weight:600;line-height:1}
+.toolbar{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;align-items:center}
+.search-wrap{position:relative;flex:1;min-width:160px;max-width:260px}
+.search-wrap input{width:100%;padding-left:34px}
+.search-icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--text3);font-size:14px;pointer-events:none}
+.bulk-bar{display:none;align-items:center;gap:10px;padding:10px 14px;background:var(--accent-dim);border:1px solid rgba(200,240,106,.2);border-radius:var(--r);margin-bottom:12px;font-size:13px;flex-wrap:wrap}
 .bulk-bar.show{display:flex}
-.overlay{display:none;position:fixed;top:0;left:0;right:0;bottom:0;width:100%;height:100%;background:rgba(0,0,0,.7);z-index:9999;align-items:center;justify-content:center}
-.overlay.open{display:flex!important}
-.modal{background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius-lg);padding:24px;width:420px;max-width:95vw;max-height:90vh;overflow-y:auto}
-.modal-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
-.modal-hd h3{font-size:15px;font-weight:500}
+.page{display:none}.page.active{display:block}
+.td-name{font-weight:500}
+.td-muted{color:var(--text2);font-size:12px}
+.td-mono{font-family:'DM Mono',monospace;font-size:11px;color:var(--text2)}
+.status-sel{background:none;border:none;cursor:pointer;font-size:11px;font-weight:500;padding:3px 6px;border-radius:20px;outline:none;-webkit-appearance:none}
+.paging{display:flex;align-items:center;gap:8px;margin-top:14px;justify-content:flex-end;flex-wrap:wrap}
+.setup-banner{background:var(--amber-bg);border:1px solid rgba(251,191,36,.3);border-radius:var(--rl);padding:14px 16px;margin-bottom:16px;font-size:13px;line-height:1.7}
+.setup-banner strong{color:var(--amber)}
+.empty-state{text-align:center;padding:48px 24px;color:var(--text3);font-size:13px}
+.info-note{background:var(--surface2);border-left:2px solid var(--accent);padding:10px 14px;font-size:12px;color:var(--text2);margin-bottom:16px;line-height:1.6}
+.csv-area{width:100%;height:120px;resize:vertical;font-family:'DM Mono',monospace;font-size:12px;line-height:1.5}
+.abgleich-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:16px}
+.match-row{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;flex-wrap:wrap}
+.match-row:last-child{border-bottom:none}
+.divider-label{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin:16px 0 8px;font-family:'DM Mono',monospace}
+.chk{cursor:pointer;accent-color:var(--accent);width:14px;height:14px}
+
+/* Mobile cards */
+.person-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:14px 16px;margin-bottom:10px;cursor:pointer;transition:border-color .15s;touch-action:manipulation}
+.person-card:active{border-color:var(--border2)}
+.person-card-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.person-card-name{font-weight:500;font-size:14px}
+.person-card-team{font-size:12px;color:var(--text2);margin-top:2px}
+.person-card-foot{display:flex;align-items:center;justify-content:space-between;margin-top:10px}
+
+/* Edit panel */
+.edit-panel{display:none;position:fixed;top:0;right:0;width:360px;height:100vh;background:var(--surface);border-left:1px solid var(--border2);z-index:500;padding:24px;overflow-y:auto;box-shadow:-8px 0 32px rgba(0,0,0,.6)}
+.edit-panel-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.edit-panel-hd h3{font-size:15px;font-weight:500}
 .form-row{margin-bottom:14px}
 .form-row label{display:block;font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px;font-family:'DM Mono',monospace}
 .form-row input,.form-row select{width:100%}
-.modal-btns{display:flex;gap:8px;justify-content:flex-end;margin-top:20px}
-.csv-area{width:100%;height:130px;resize:vertical;font-family:'DM Mono',monospace;font-size:12px;line-height:1.5}
-.abgleich-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px}
-.info-note{background:var(--surface2);border-left:2px solid var(--accent);padding:10px 14px;font-size:12px;color:var(--text2);margin-bottom:16px;line-height:1.6}
-.match-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--border);font-size:13px;flex-wrap:wrap}
-.match-row:last-child{border-bottom:none}
-.paging{display:flex;align-items:center;gap:8px;margin-top:14px;justify-content:flex-end}
-.page{display:none}.page.active{display:block}
-.toast{position:fixed;bottom:24px;right:24px;background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius);padding:12px 18px;font-size:13px;z-index:999;transform:translateY(80px);opacity:0;transition:all .25s;pointer-events:none}
-.toast.show{transform:translateY(0);opacity:1}
-.setup-banner{background:var(--amber-bg);border:1px solid rgba(251,191,36,.3);border-radius:var(--radius-lg);padding:16px 20px;margin-bottom:20px;font-size:13px;line-height:1.7}
-.setup-banner strong{color:var(--amber)}
-.chk{cursor:pointer;accent-color:var(--accent);width:14px;height:14px}
-.divider-label{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin:16px 0 8px;font-family:'DM Mono',monospace}
-.empty-state{text-align:center;padding:48px 24px;color:var(--text3);font-size:13px}
+.panel-btns{display:flex;gap:8px;margin-top:20px}
+.panel-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:499}
+
+@media(max-width:767px){
+  .edit-panel{width:100%;left:0;right:0;top:auto;bottom:0;height:90vh;border-left:none;border-top:1px solid var(--border2);border-radius:16px 16px 0 0;box-shadow:0 -8px 32px rgba(0,0,0,.6)}
+}
 </style>
 </head>
 <body>
 <div class="shell">
+  <!-- Desktop Sidebar -->
   <aside class="sidebar">
     <div class="sidebar-logo">
       <div class="logo-tag">Event Tool</div>
@@ -115,27 +157,27 @@ tbody tr:hover td{background:rgba(255,255,255,.02)}
     <div class="sidebar-stats" id="sidebar-stats"></div>
   </aside>
 
+  <!-- Main -->
   <div class="main">
     <div class="topbar">
       <div>
         <div class="page-title" id="top-title">Teilnehmerliste</div>
-        <div class="page-sub" id="top-sub">Alle eingeladenen und angemeldeten Personen</div>
+        <div class="page-sub" id="top-sub" style="font-size:12px;color:var(--text2);margin-top:1px">Alle eingeladenen Personen</div>
       </div>
-      <div style="display:flex;gap:8px;align-items:center">
+      <div class="topbar-actions" style="display:flex;gap:8px;align-items:center">
         <div class="sync-indicator" id="sync-indicator">
           <span class="sync-dot" id="sync-dot"></span>
-          <span id="sync-label">Nicht verbunden</span>
+          <span id="sync-label">Verbinde...</span>
         </div>
-        <button class="btn" onclick="exportCSV()">↓ CSV</button>
-        <button class="btn primary" onclick="openAdd()">+ Person</button>
+        <button class="btn sm" onclick="exportCSV()" style="display:none" id="export-btn">↓ CSV</button>
+        <button class="btn primary sm" onclick="openAdd()" id="add-btn">+ Person</button>
       </div>
     </div>
 
     <div class="content">
       <div id="setup-banner" class="setup-banner" style="display:none">
-        <strong>⚠ Google Sheets noch nicht verbunden.</strong> Gehe zu <strong>Einstellungen</strong> und trage die Script-URL ein, damit alle Änderungen in Echtzeit gespeichert werden. Bis dahin werden Daten nur lokal gespeichert.
+        <strong>⚠ Nicht verbunden.</strong> Gehe zu <strong>Einstellungen</strong> und trage die Script-URL ein.
       </div>
-
       <div class="kpi-row" id="kpi-row"></div>
 
       <!-- Liste -->
@@ -153,14 +195,11 @@ tbody tr:hover td{background:rgba(255,255,255,.02)}
         </div>
         <div class="bulk-bar" id="bulk-bar">
           <span id="bulk-count" style="color:var(--accent);font-weight:500"></span>
-          <select id="bulk-status">
-            <option value="">Status setzen…</option>
-            <option>Eingeladen</option><option>Zugesagt</option>
-            <option>Abgesagt</option><option>Warteliste</option><option>Erschienen</option>
-          </select>
+          <select id="bulk-status"><option value="">Status setzen…</option><option>Eingeladen</option><option>Zugesagt</option><option>Abgesagt</option><option>Warteliste</option><option>Erschienen</option></select>
           <button class="btn sm primary" onclick="applyBulk()">Anwenden</button>
           <button class="btn sm ghost" onclick="clearSel()">Aufheben</button>
         </div>
+        <!-- Desktop table -->
         <div class="table-wrap">
           <table>
             <thead><tr>
@@ -170,19 +209,16 @@ tbody tr:hover td{background:rgba(255,255,255,.02)}
             <tbody id="tbody"></tbody>
           </table>
         </div>
+        <!-- Mobile cards -->
+        <div class="card-list" id="card-list"></div>
         <div class="paging" id="paging"></div>
       </div>
 
       <!-- Abgleich -->
       <div class="page" id="page-abgleich">
-        <div class="abgleich-section" style="margin-bottom:20px">
-          <div class="info-note">
-            Google Forms → Antworten → CSV herunterladen. Spalten Name + E-Mail einfügen, eine Person pro Zeile. Abgleich läuft über die E-Mail.
-          </div>
-          <div class="form-row">
-            <label>CSV-Inhalt einfügen</label>
-            <textarea class="csv-area" id="csvInput" placeholder="Max Mustermann, max@firma.de&#10;Erika Muster, erika@firma.de"></textarea>
-          </div>
+        <div class="abgleich-section" style="margin-bottom:16px">
+          <div class="info-note">Google Forms → Antworten → CSV herunterladen. Name + E-Mail einfügen, eine Person pro Zeile.</div>
+          <div class="form-row"><label>CSV einfügen</label><textarea class="csv-area" id="csvInput" placeholder="Max Mustermann, max@firma.de"></textarea></div>
           <button class="btn primary" onclick="runAbgleich()">Abgleich starten →</button>
         </div>
         <div id="abgleich-result"></div>
@@ -191,15 +227,10 @@ tbody tr:hover td{background:rgba(255,255,255,.02)}
       <!-- Import -->
       <div class="page" id="page-import">
         <div class="abgleich-section">
-          <div class="info-note">
-            Format pro Zeile: <strong>Name, E-Mail, Firma/Rolle</strong> (E-Mail + Firma optional). Duplikate werden übersprungen.
-          </div>
-          <div class="form-row">
-            <label>Personen einfügen</label>
-            <textarea class="csv-area" id="bulkInput" style="height:160px" placeholder="Anna Meier, anna@firma.de, Marketing GmbH&#10;Ben Koch, ben@firma.de, Sales AG"></textarea>
-          </div>
+          <div class="info-note">Format: <strong>Name, E-Mail, Firma</strong> (E-Mail + Firma optional). Duplikate werden übersprungen.</div>
+          <div class="form-row"><label>Personen einfügen</label><textarea class="csv-area" id="bulkInput" style="height:140px" placeholder="Anna Meier, anna@firma.de, Marketing GmbH"></textarea></div>
           <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
-            <label style="font-size:13px;color:var(--text2)">Startstatus:</label>
+            <label style="font-size:13px;color:var(--text2)">Status:</label>
             <select id="bulk-init-status"><option>Eingeladen</option><option>Zugesagt</option><option>Warteliste</option></select>
           </div>
           <button class="btn primary" onclick="runBulkImport()">Importieren →</button>
@@ -210,29 +241,18 @@ tbody tr:hover td{background:rgba(255,255,255,.02)}
       <!-- Einstellungen -->
       <div class="page" id="page-einstellungen">
         <div class="abgleich-section" style="max-width:520px">
-          <div style="font-size:15px;font-weight:500;margin-bottom:16px">Google Sheets Verbindung</div>
-          <div class="info-note" style="margin-bottom:20px">
-            <strong>So geht's:</strong><br>
-            1. Google Sheet anlegen, erste Zeile: id | name | email | tel | team | status | notiz<br>
-            2. Erweiterungen → Apps Script → Code einfügen (separate .gs Datei)<br>
-            3. Deployen als Web-App → URL hier eintragen<br>
-            4. Fertig — alle sehen Änderungen in Echtzeit
-          </div>
-          <div class="form-row">
-            <label>Apps Script Web-App URL</label>
-            <input type="text" id="script-url" placeholder="https://script.google.com/macros/s/…/exec" style="width:100%">
-          </div>
-          <div style="display:flex;gap:8px;margin-top:8px">
+          <div style="font-size:15px;font-weight:500;margin-bottom:14px">Google Sheets Verbindung</div>
+          <div class="form-row"><label>Apps Script URL</label><input type="text" id="script-url" placeholder="https://script.google.com/macros/s/…/exec" style="width:100%"></div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap">
             <button class="btn primary" onclick="saveScriptUrl()">Verbindung speichern</button>
-            <button class="btn" onclick="testConnection()">Verbindung testen</button>
+            <button class="btn" onclick="testConnection()">Testen</button>
           </div>
-          <div id="connection-result" style="margin-top:14px;font-size:13px"></div>
-
-          <div style="border-top:1px solid var(--border);margin-top:24px;padding-top:20px">
-            <div style="font-size:15px;font-weight:500;margin-bottom:12px">Daten verwalten</div>
+          <div id="connection-result" style="margin-top:12px;font-size:13px"></div>
+          <div style="border-top:1px solid var(--border);margin-top:20px;padding-top:20px">
+            <div style="font-size:14px;font-weight:500;margin-bottom:12px">Daten</div>
             <div style="display:flex;gap:8px;flex-wrap:wrap">
-              <button class="btn" onclick="pushLocalToSheets()">↑ Lokale Daten ins Sheet laden</button>
-              <button class="btn" onclick="pullFromSheets()">↓ Sheet-Daten laden</button>
+              <button class="btn" onclick="pushLocalToSheets()">↑ Ins Sheet laden</button>
+              <button class="btn" onclick="pullFromSheets()">↓ Vom Sheet laden</button>
             </div>
             <div id="sync-result" style="margin-top:10px;font-size:12px;color:var(--text2)"></div>
           </div>
@@ -240,461 +260,329 @@ tbody tr:hover td{background:rgba(255,255,255,.02)}
       </div>
     </div>
   </div>
+
+  <!-- Mobile Bottom Nav -->
+  <nav class="mobile-nav">
+    <button class="mob-nav-item active" id="mob-liste" onclick="goPage('liste',null,'mob-liste')">
+      <span class="mob-nav-icon">◈</span><span>Liste</span>
+    </button>
+    <button class="mob-nav-item" id="mob-abgleich" onclick="goPage('abgleich',null,'mob-abgleich')">
+      <span class="mob-nav-icon">⇄</span><span>Abgleich</span>
+    </button>
+    <button class="mob-nav-item" id="mob-import" onclick="goPage('import',null,'mob-import')">
+      <span class="mob-nav-icon">↧</span><span>Import</span>
+    </button>
+    <button class="mob-nav-item" id="mob-einstellungen" onclick="goPage('einstellungen',null,'mob-einstellungen')">
+      <span class="mob-nav-icon">⚙</span><span>Settings</span>
+    </button>
+  </nav>
 </div>
 
-<!-- Edit Panel (inline, kein Modal) -->
-<div id="edit-panel" style="display:none;position:fixed;top:0;right:0;width:340px;height:100vh;background:#181818;border-left:1px solid rgba(255,255,255,.14);z-index:9999;padding:24px;overflow-y:auto;box-shadow:-4px 0 20px rgba(0,0,0,.5)">
-  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
-    <h3 id="modal-title" style="font-size:15px;font-weight:500;color:#f0f0f0">Bearbeiten</h3>
-    <button onclick="closeModal()" style="background:none;border:none;color:#888;cursor:pointer;font-size:18px;padding:4px 8px">✕</button>
+<!-- Edit Panel -->
+<div class="panel-overlay" id="panel-overlay" onclick="closeModal()"></div>
+<div class="edit-panel" id="edit-panel">
+  <div class="edit-panel-hd">
+    <h3 id="modal-title">Person bearbeiten</h3>
+    <button onclick="closeModal()" style="background:none;border:none;color:var(--text2);cursor:pointer;font-size:20px;padding:4px 8px;line-height:1">✕</button>
   </div>
-  <div style="margin-bottom:12px"><label style="display:block;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px">Name *</label><input type="text" id="f-name" style="width:100%"></div>
-  <div style="margin-bottom:12px"><label style="display:block;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px">E-Mail</label><input type="email" id="f-email" style="width:100%"></div>
-  <div style="margin-bottom:12px"><label style="display:block;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px">Telefon</label><input type="tel" id="f-tel" style="width:100%"></div>
-  <div style="margin-bottom:12px"><label style="display:block;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px">Firma / Rolle</label><input type="text" id="f-team" style="width:100%"></div>
-  <div style="margin-bottom:12px"><label style="display:block;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px">Status</label>
-    <select id="f-status" style="width:100%"><option>Eingeladen</option><option>Zugesagt</option><option>Abgesagt</option><option>Warteliste</option><option>Erschienen</option></select>
+  <div class="form-row"><label>Name *</label><input type="text" id="f-name"></div>
+  <div class="form-row"><label>E-Mail</label><input type="email" id="f-email"></div>
+  <div class="form-row"><label>Telefon</label><input type="tel" id="f-tel"></div>
+  <div class="form-row"><label>Firma / Rolle</label><input type="text" id="f-team"></div>
+  <div class="form-row"><label>Status</label>
+    <select id="f-status"><option>Eingeladen</option><option>Zugesagt</option><option>Abgesagt</option><option>Warteliste</option><option>Erschienen</option></select>
   </div>
-  <div style="margin-bottom:20px"><label style="display:block;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px">Notiz</label><input type="text" id="f-notiz" style="width:100%"></div>
-  <div style="display:flex;gap:8px">
-    <button onclick="closeModal()" style="flex:1;padding:9px;border-radius:8px;border:1px solid rgba(255,255,255,.14);background:#222;color:#888;cursor:pointer;font-size:13px">Abbrechen</button>
-    <button onclick="savePerson()" style="flex:1;padding:9px;border-radius:8px;border:none;background:#c8f06a;color:#0f0f0f;cursor:pointer;font-size:13px;font-weight:500">Speichern</button>
+  <div class="form-row"><label>Notiz</label><input type="text" id="f-notiz"></div>
+  <div class="panel-btns">
+    <button onclick="closeModal()" class="btn" style="flex:1">Abbrechen</button>
+    <button onclick="savePerson()" class="btn primary" style="flex:1">Speichern</button>
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-// ── CONFIG ────────────────────────────────────────────
-const LS_KEY   = 'worksout_v2';
-const LS_URL   = 'worksout_scripturl';
+const LS_KEY='worksout_v2', LS_URL='worksout_scripturl';
+const SCRIPT_URL_DEFAULT='https://script.google.com/macros/s/AKfycbxJozTimDP0uGxH6YXtUaPiA4XLQ_8lS3oTNEUA4B3mBNIX2bf9kpIa7Yk6ukwv9oRccg/exec';
 
-// ── STARTER DATA ──────────────────────────────────────
-const STARTER = [
-  {name:'Niklas König',email:'',tel:'',team:'Datenschutzbeauftragter',status:'Eingeladen',notiz:''},
-  {name:'Soufian',email:'',tel:'',team:'GoldTax',status:'Eingeladen',notiz:''},
-  {name:'Mohamed',email:'',tel:'',team:'Fairdoc',status:'Eingeladen',notiz:''},
-  {name:'Smail',email:'',tel:'',team:'Prokurist SWK',status:'Eingeladen',notiz:''},
-  {name:'Jack Papen',email:'',tel:'',team:'Konzept Weiß / Krypto',status:'Eingeladen',notiz:''},
-  {name:'Maik Wevers',email:'m.wevers@smartpro-nrw.de',tel:'01627365421',team:'COO Smart Pro',status:'Zugesagt',notiz:'via Google Forms'},
-  {name:'Sani',email:'',tel:'',team:'Werbeagentur / Designer',status:'Eingeladen',notiz:''},
-  {name:'Mohamed Amraue',email:'',tel:'',team:'Steuern mit System',status:'Eingeladen',notiz:''},
-  {name:'Khalid Bounouar',email:'',tel:'',team:'CEO Rebellcomedy',status:'Eingeladen',notiz:''},
-  {name:'Nils van Gulijk',email:'',tel:'',team:'Allbau Immobilien',status:'Eingeladen',notiz:''},
-  {name:'Shkelzen Zejna',email:'',tel:'',team:'Samt & Seide Immobilien',status:'Eingeladen',notiz:''},
-  {name:'Burhan',email:'',tel:'',team:'CEO Hatex Group',status:'Eingeladen',notiz:''},
-  {name:'Aiman Kurdi',email:'',tel:'',team:'CEO Aixtextiles',status:'Eingeladen',notiz:''},
-  {name:'Pascal Weber',email:'',tel:'',team:'Head of XY Philip Morris',status:'Eingeladen',notiz:''},
-  {name:'Noak Brüder',email:'',tel:'',team:'Spielerberater',status:'Eingeladen',notiz:''},
-  {name:'Matthias Rombey',email:'',tel:'',team:'CEO & Gründer Yomaro',status:'Eingeladen',notiz:''},
-  {name:'Roger Spaen',email:'',tel:'',team:'CEO Loop Care',status:'Eingeladen',notiz:''},
-  {name:'Beate Yasar',email:'',tel:'',team:'Direktorin Sparkasse Düsseldorf',status:'Eingeladen',notiz:''},
-  {name:'Suzana Novinscak',email:'',tel:'',team:'Wirtschaftsförderung Düsseldorf',status:'Eingeladen',notiz:''},
-  {name:'Adem Postal',email:'',tel:'',team:'CEO Kioki Café',status:'Eingeladen',notiz:''},
-  {name:'Felix Thönnissen',email:'',tel:'',team:'Keynote Speaker & Unternehmer',status:'Eingeladen',notiz:''},
-  {name:'Mohamed Jaghou',email:'',tel:'',team:'GF Bildungscampus',status:'Eingeladen',notiz:''},
-  {name:'Tim Cörper',email:'',tel:'',team:'Rechtsanwalt',status:'Eingeladen',notiz:''},
-  {name:'Ibo Ahmiane',email:'',tel:'',team:'Investment Experte & Influencer',status:'Eingeladen',notiz:''},
-  {name:'Samet Yilmaz',email:'',tel:'',team:'Intersnack',status:'Eingeladen',notiz:''},
-  {name:'Ali Bentaleb',email:'',tel:'',team:'Telekom',status:'Eingeladen',notiz:''},
-  {name:'Burhan Aydin',email:'',tel:'',team:'GF Mc Makler',status:'Eingeladen',notiz:''},
-  {name:'Miriam Nink',email:'',tel:'',team:'Coca Cola',status:'Eingeladen',notiz:''},
-  {name:'Erol Güngör',email:'',tel:'',team:'GF Mydent GmbH',status:'Eingeladen',notiz:'⚠ Volkan Demirbas (Mydent) angemeldet – prüfen'},
-  {name:'Yüksel Korkmaz',email:'',tel:'',team:'GF Dental Company GmbH',status:'Eingeladen',notiz:''},
-  {name:'Niklas Radner',email:'',tel:'',team:'CEO Nelly Solutions',status:'Eingeladen',notiz:''},
-  {name:'Lukas Eichner',email:'',tel:'',team:'CFO Nelly Solutions',status:'Eingeladen',notiz:''},
-  {name:'Jan Vordenbäumen',email:'',tel:'',team:'CEO Cinify',status:'Eingeladen',notiz:''},
-  {name:'Marco Welz',email:'',tel:'',team:'Partner Unternehmensberatung',status:'Eingeladen',notiz:''},
-  {name:'Karolin Kwickert',email:'',tel:'',team:'Partnerin Unternehmensberatung',status:'Eingeladen',notiz:''},
-  {name:'Amer Gorani',email:'',tel:'',team:'Microsoft Senior Manager',status:'Eingeladen',notiz:''},
-  {name:'Bahar Gonzalves Dominguez',email:'',tel:'',team:'Inhaberin DiDento',status:'Eingeladen',notiz:''},
-  {name:'Levent Kanal',email:'',tel:'',team:'Augenarzt & Unternehmer',status:'Eingeladen',notiz:''},
-  {name:'Isak Omeirat',email:'io@igo-food.de',tel:'015566604656',team:'IGO FOOD UG',status:'Zugesagt',notiz:'via Google Forms'},
-  {name:'Kenan',email:'',tel:'',team:'Bau und Leben',status:'Eingeladen',notiz:''},
-  {name:'Efe Duran',email:'',tel:'',team:'EPSA Geschäftsführer',status:'Eingeladen',notiz:'⚠ Khalid Cheffadi (EPSA) angemeldet – prüfen'},
-  {name:'Sinan',email:'',tel:'',team:'GF Kont',status:'Eingeladen',notiz:''},
-  {name:'Adil Habib',email:'adilhb@outlook.de',tel:'01716846606',team:'SWK Energie – CRO Manager',status:'Zugesagt',notiz:'via Forms (nicht eingeladen)'},
-  {name:'Ilias Albay',email:'ilias.albay@outlook.de',tel:'01715803590',team:'Drews Electronic GmbH',status:'Zugesagt',notiz:'via Forms (nicht eingeladen)'},
-  {name:'Khalid Cheffadi',email:'khalid.ch@live.de',tel:'01627777940',team:'EPSA Deutschland GmbH',status:'Zugesagt',notiz:'via Forms – ggf. Kontakt von Efe Duran'},
-  {name:'Mohamed Sighaoui',email:'Msighaoui@gmail.com',tel:'01789019173',team:'Lota Engineering – IT Manager',status:'Zugesagt',notiz:'via Forms (nicht eingeladen)'},
-  {name:'Deniz Caliskan',email:'deniz.caliskan@icloud.com',tel:'01781855971',team:'Ki-Consulting',status:'Zugesagt',notiz:'via Forms (nicht eingeladen)'},
-  {name:'Volkan Demirbas',email:'demirbas86@yahoo.de',tel:'04917681016421',team:'Mydent Zahnärzte – GF',status:'Zugesagt',notiz:'via Forms – ggf. Kontakt von Erol Güngör'},
-  {name:'Monika Eigenstetter',email:'monika.eigenstetter@t-online.de',tel:'01791147256',team:'Freie Beratung',status:'Zugesagt',notiz:'via Forms (nicht eingeladen)'},
-  {name:'Mirco Donaera',email:'mircodonaera@googlemail.com',tel:'015154767527',team:'BFS – Senior Partner Manager',status:'Zugesagt',notiz:'via Forms (nicht eingeladen)'},
-  {name:'Hendrik Eichner',email:'Eichnerh@gmx.de',tel:'01754360777',team:'BEGO – Director International Sales',status:'Zugesagt',notiz:'via Forms (nicht eingeladen)'},
-  {name:'Sezgin Yüksel',email:'sezgin.yueksel@auricon-group.de',tel:'01719293112',team:'AURICON – Unternehmensberater',status:'Zugesagt',notiz:'via Forms (nicht eingeladen)'},
-  {name:'Tufan Çalışkan',email:'tufan.caliskan@me.com',tel:'015773738840',team:'Event Agentur',status:'Zugesagt',notiz:'via Forms (nicht eingeladen)'},
-  {name:'Artem Syrenskiy',email:'artem.syrenskiy@web.de',tel:'01732335398',team:'Oracle – Beratung',status:'Zugesagt',notiz:'via Forms (nicht eingeladen)'},
-  {name:'Farid Boubkraoui',email:'bfarid1001@yahoo.com',tel:'01739338381',team:'Garten & Landschaftsbau',status:'Zugesagt',notiz:'via Forms (nicht eingeladen)'},
-  {name:'Ali Shehatta',email:'ali.shehatta@gmx.de',tel:'017641766605',team:'NEOVESTA GmbH – CEO',status:'Zugesagt',notiz:'via Forms (nicht eingeladen)'},
-  {name:'Lisa Chaos',email:'info@lichadent.de',tel:'+491775039482',team:'lichadent – Abrechnungsmanagerin',status:'Zugesagt',notiz:'via Forms (nicht eingeladen)'},
-  // LinkedIn
-  {name:'Elmir Avdic',email:'',tel:'',team:'Senior PM (PV+BESS) – enshift',status:'Eingeladen',notiz:'via LinkedIn'},
-  {name:'Ogün Michael Witt',email:'',tel:'',team:'ASC Apple | Communication Design HSD',status:'Eingeladen',notiz:'via LinkedIn'},
-  {name:'Julian Wannhoff',email:'',tel:'',team:'E-Mobility & Truck Charging Specialist',status:'Eingeladen',notiz:'via LinkedIn'},
-  {name:'Lilly Diana Koch',email:'',tel:'',team:'CEO MAQINA360 – Design Director',status:'Eingeladen',notiz:'via LinkedIn'},
-  {name:'Halima Pflipsen',email:'',tel:'',team:'Founder TASTE MOROCCO | TV Expert ZDF',status:'Eingeladen',notiz:'via LinkedIn'},
-  {name:'Leila Demircelik',email:'',tel:'',team:'Content Creator @leilakocht',status:'Eingeladen',notiz:'via LinkedIn'},
-  {name:'Karima Benbrahim',email:'',tel:'',team:'Erziehungswissenschaftlerin | Expertin Rassismus & Empowerment',status:'Eingeladen',notiz:'via LinkedIn'},
-  {name:'Dihia Wegmann',email:'',tel:'',team:'Diversität & BGM | Mediation | Equal-Care',status:'Eingeladen',notiz:'via LinkedIn'},
-  {name:'Iqbal-Prince M. Alassani',email:'',tel:'',team:'CEO & Founder YnP Energy & Consulting',status:'Eingeladen',notiz:'via LinkedIn'},
-];
+let scriptUrl = localStorage.getItem(LS_URL) || SCRIPT_URL_DEFAULT;
+let people=[], nextId=1, editId=null, page=1, pageSize=20;
 
-// ── STATE ────────────────────────────────────────────
-let scriptUrl = localStorage.getItem(LS_URL) || 'https://script.google.com/macros/s/AKfycbxJozTimDP0uGxH6YXtUaPiA4XLQ_8lS3oTNEUA4B3mBNIX2bf9kpIa7Yk6ukwv9oRccg/exec';
-let people = [];
-let nextId = 1;
-let editId = null, page = 1, pageSize = 20;
-let connected = false;
+function loadLocal(){try{const r=localStorage.getItem(LS_KEY);if(r)return JSON.parse(r);}catch(e){}return[];}
+function saveLocal(){try{localStorage.setItem(LS_KEY,JSON.stringify(people));}catch(e){}}
 
-function loadLocal() {
-  try {
-    const raw = localStorage.getItem(LS_KEY);
-    if (raw) return JSON.parse(raw);
-  } catch(e) {}
-  return STARTER.map((d,i) => ({...d, id: String(i+1), sel: false}));
-}
-function saveLocal() {
-  try { localStorage.setItem(LS_KEY, JSON.stringify(people)); } catch(e) {}
-}
-
-// ── SHEETS API (JSONP - umgeht CORS) ─────────────────
-function api(params) {
-  if (!scriptUrl) return Promise.reject("no-url");
-  return new Promise(function(resolve, reject) {
-    const cbName = "cb_" + Date.now();
-    const script = document.createElement("script");
-    const timeout = setTimeout(function() {
-      delete window[cbName];
-      if (document.body.contains(script)) document.body.removeChild(script);
-      reject(new Error("Timeout"));
-    }, 10000);
-    window[cbName] = function(data) {
-      clearTimeout(timeout);
-      delete window[cbName];
-      if (document.body.contains(script)) document.body.removeChild(script);
-      resolve(data);
-    };
-    params.callback = cbName;
-    script.src = scriptUrl + "?" + new URLSearchParams(params).toString();
-    script.onerror = function() { clearTimeout(timeout); reject(new Error("Script error")); };
-    document.body.appendChild(script);
+// JSONP API
+function api(params){
+  if(!scriptUrl)return Promise.reject('no-url');
+  return new Promise(function(resolve,reject){
+    const cb='cb_'+Date.now();
+    const s=document.createElement('script');
+    const t=setTimeout(function(){delete window[cb];if(s.parentNode)s.parentNode.removeChild(s);reject(new Error('Timeout'));},12000);
+    window[cb]=function(data){clearTimeout(t);delete window[cb];if(s.parentNode)s.parentNode.removeChild(s);resolve(data);};
+    params.callback=cb;
+    s.src=scriptUrl+'?'+new URLSearchParams(params).toString();
+    s.onerror=function(){clearTimeout(t);reject(new Error('Script error'));};
+    document.body.appendChild(s);
   });
 }
 
-function setSyncStatus(state, label) {
-  const dot = document.getElementById('sync-dot');
-  const lbl = document.getElementById('sync-label');
-  dot.className = 'sync-dot ' + state;
-  lbl.textContent = label;
-  connected = (state === 'ok');
+function setSyncStatus(state,label){
+  document.getElementById('sync-dot').className='sync-dot '+state;
+  document.getElementById('sync-label').textContent=label;
 }
 
-async function pullFromSheets() {
-  if (!scriptUrl) { toast('Keine Script-URL hinterlegt'); return; }
-  setSyncStatus('syncing', 'Lade...');
-  try {
-    const res = await api({ action: 'getAll' });
-    if (res.error) throw new Error(res.error);
-    if (res.people && res.people.length > 0) {
-      people = res.people.map(p => ({...p, id: String(p.id), sel: false}));
-      nextId = Math.max(...people.map(p => parseInt(p.id)||0), 0) + 1;
-      saveLocal();
-      setSyncStatus('ok', 'Verbunden');
-      render(); toast('Daten geladen (' + people.length + ' Personen)');
-      document.getElementById('sync-result').textContent = people.length + ' Personen geladen.';
-    } else {
-      setSyncStatus('ok', 'Verbunden');
-      toast('Sheet ist leer — lokale Daten behalten');
-    }
-  } catch(e) {
-    setSyncStatus('error', 'Fehler');
-    toast('Verbindungsfehler: ' + e.message);
-  }
+async function pullFromSheets(){
+  if(!scriptUrl){toast('Keine URL');return;}
+  setSyncStatus('syncing','Lade...');
+  try{
+    const res=await api({action:'getAll'});
+    if(res.error)throw new Error(res.error);
+    if(res.people&&res.people.length>0){
+      people=res.people.map(p=>({...p,id:String(p.id),sel:false}));
+      nextId=Math.max(...people.map(p=>parseInt(p.id)||0),0)+1;
+      saveLocal();setSyncStatus('ok','Verbunden');render();toast('Daten geladen ('+people.length+')');
+      document.getElementById('sync-result').textContent=people.length+' Personen geladen.';
+    } else {setSyncStatus('ok','Verbunden');toast('Verbunden – Sheet leer');}
+  }catch(e){setSyncStatus('error','Fehler');toast('Fehler: '+e.message);}
 }
 
-async function pushToSheets(person) {
-  if (!scriptUrl) return;
-  try {
-    await api({ action: 'save', person: JSON.stringify(person) });
-    setSyncStatus('ok', 'Gespeichert');
-  } catch(e) {
-    setSyncStatus('error', 'Sync-Fehler');
-  }
+async function pushToSheets(person){
+  if(!scriptUrl)return;
+  try{await api({action:'save',person:encodeURIComponent(JSON.stringify(person))});setSyncStatus('ok','Gespeichert');}
+  catch(e){setSyncStatus('error','Sync-Fehler');}
 }
 
-async function deleteFromSheets(id) {
-  if (!scriptUrl) return;
-  try { await api({ action: 'delete', id }); } catch(e) {}
+async function deleteFromSheets(id){if(!scriptUrl)return;try{await api({action:'delete',id});}catch(e){}}
+
+async function pushLocalToSheets(){
+  if(!scriptUrl){toast('Keine URL');return;}
+  setSyncStatus('syncing','Hochladen...');
+  try{
+    const res=await api({action:'saveAll',people:encodeURIComponent(JSON.stringify(people))});
+    setSyncStatus('ok','Verbunden');
+    toast(people.length+' Personen ins Sheet geladen');
+    document.getElementById('sync-result').textContent=people.length+' Personen geschrieben.';
+  }catch(e){setSyncStatus('error','Fehler');toast('Fehler: '+e.message);}
 }
 
-async function pushLocalToSheets() {
-  if (!scriptUrl) { toast("Keine Script-URL hinterlegt"); return; }
-  setSyncStatus("syncing", "Hochladen...");
-  try {
-    const res = await api({ action: "saveAll", people: JSON.stringify(people) });
-    setSyncStatus("ok", "Verbunden");
-    toast(people.length + " Personen ins Sheet geladen");
-    document.getElementById("sync-result").textContent = people.length + " Personen wurden ins Sheet geschrieben.";
-  } catch(e) {
-    setSyncStatus("error", "Fehler");
-    toast("Fehler: " + e.message);
-  }
-}
-
-// ── SETUP ─────────────────────────────────────────────
-async function init() {
-  people = loadLocal();
-  nextId = Math.max(...people.map(p => parseInt(p.id)||0), 0) + 1;
+async function init(){
+  people=loadLocal();
+  nextId=Math.max(...people.map(p=>parseInt(p.id)||0),0)+1;
+  document.getElementById('script-url').value=scriptUrl;
   render();
-
-  if (scriptUrl) {
-    document.getElementById('script-url').value = scriptUrl;
-    setSyncStatus('syncing', 'Verbinde...');
-    await pullFromSheets();
-  } else {
-    setSyncStatus('error', 'Nicht verbunden');
-    document.getElementById('setup-banner').style.display = 'block';
-  }
+  if(scriptUrl){setSyncStatus('syncing','Verbinde...');await pullFromSheets();}
+  else{setSyncStatus('error','Nicht verbunden');document.getElementById('setup-banner').style.display='block';}
+  // show export btn on desktop
+  if(window.innerWidth>=768)document.getElementById('export-btn').style.display='';
 }
 
-async function saveScriptUrl() {
-  const url = document.getElementById('script-url').value.trim();
-  if (!url) return;
-  scriptUrl = url;
-  localStorage.setItem(LS_URL, url);
-  document.getElementById('setup-banner').style.display = 'none';
+async function saveScriptUrl(){
+  const url=document.getElementById('script-url').value.trim();
+  if(!url)return;
+  scriptUrl=url;localStorage.setItem(LS_URL,url);
+  document.getElementById('setup-banner').style.display='none';
   await pullFromSheets();
 }
 
-async function testConnection() {
-  const url = document.getElementById('script-url').value.trim();
-  if (!url) { alert('Bitte URL eingeben'); return; }
-  scriptUrl = url;
-  const res = document.getElementById('connection-result');
-  res.textContent = 'Teste...';
-  try {
-    const data = await api({ action: 'getAll' });
-    if (data.error) throw new Error(data.error);
-    res.style.color = 'var(--green)';
-    res.textContent = '✓ Verbindung erfolgreich! ' + (data.people?.length||0) + ' Personen im Sheet.';
-    setSyncStatus('ok', 'Verbunden');
-  } catch(e) {
-    res.style.color = 'var(--red)';
-    res.textContent = '✗ Fehler: ' + e.message;
-    setSyncStatus('error', 'Fehler');
-  }
+async function testConnection(){
+  const url=document.getElementById('script-url').value.trim();
+  if(!url){alert('Bitte URL eingeben');return;}
+  scriptUrl=url;
+  const res=document.getElementById('connection-result');
+  res.textContent='Teste...';
+  try{
+    const data=await api({action:'getAll'});
+    if(data.error)throw new Error(data.error);
+    res.style.color='var(--green)';res.textContent='✓ Verbunden! '+(data.people?.length||0)+' Personen.';
+    setSyncStatus('ok','Verbunden');
+  }catch(e){res.style.color='var(--red)';res.textContent='✗ '+e.message;setSyncStatus('error','Fehler');}
 }
 
-// ── NAV ───────────────────────────────────────────────
-const pageMeta = {
-  liste:{title:'Teilnehmerliste',sub:'Alle eingeladenen und angemeldeten Personen'},
-  abgleich:{title:'Google Forms Abgleich',sub:'Neue Anmeldungen aus dem Formular einpflegen'},
-  import:{title:'Bulk-Import',sub:'Mehrere Personen auf einmal hinzufügen'},
-  einstellungen:{title:'Einstellungen',sub:'Google Sheets Verbindung konfigurieren'},
-};
-function goPage(t, btn) {
-  document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  if (btn) btn.classList.add('active');
-  document.getElementById('page-' + t).classList.add('active');
-  document.getElementById('top-title').textContent = pageMeta[t].title;
-  document.getElementById('top-sub').textContent = pageMeta[t].sub;
+// NAV
+const pageMeta={liste:{title:'Teilnehmerliste',sub:'Alle eingeladenen Personen'},abgleich:{title:'Forms-Abgleich',sub:'Neue Anmeldungen einpflegen'},import:{title:'Bulk-Import',sub:'Mehrere Personen hinzufügen'},einstellungen:{title:'Einstellungen',sub:'Google Sheets konfigurieren'}};
+
+function goPage(t,btn,mobId){
+  document.querySelectorAll('.nav-item').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.mob-nav-item').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  if(btn)btn.classList.add('active');
+  if(mobId)document.getElementById(mobId).classList.add('active');
+  document.getElementById('page-'+t).classList.add('active');
+  document.getElementById('top-title').textContent=pageMeta[t].title;
+  document.getElementById('top-sub').textContent=pageMeta[t].sub;
+  document.getElementById('add-btn').style.display=(t==='liste')?'':'none';
 }
 
-// ── RENDER ────────────────────────────────────────────
-function renderStats() {
-  const c = {Eingeladen:0,Zugesagt:0,Abgesagt:0,Warteliste:0,Erschienen:0};
-  people.forEach(p => c[p.status] = (c[p.status]||0)+1);
-  document.getElementById('kpi-row').innerHTML = `
+// STATS
+function renderStats(){
+  const c={Eingeladen:0,Zugesagt:0,Abgesagt:0,Warteliste:0,Erschienen:0};
+  people.forEach(p=>c[p.status]=(c[p.status]||0)+1);
+  document.getElementById('kpi-row').innerHTML=`
     <div class="kpi"><div class="kpi-label">Gesamt</div><div class="kpi-val">${people.length}</div></div>
-    <div class="kpi"><div class="kpi-label">Eingeladen</div><div class="kpi-val" style="color:var(--blue)">${c.Eingeladen}</div></div>
     <div class="kpi"><div class="kpi-label">Zugesagt</div><div class="kpi-val" style="color:var(--green)">${c.Zugesagt}</div></div>
-    <div class="kpi"><div class="kpi-label">Erschienen</div><div class="kpi-val" style="color:var(--teal)">${c.Erschienen}</div></div>
+    <div class="kpi"><div class="kpi-label">Eingeladen</div><div class="kpi-val" style="color:var(--blue)">${c.Eingeladen}</div></div>
     <div class="kpi"><div class="kpi-label">Abgesagt</div><div class="kpi-val" style="color:var(--red)">${c.Abgesagt}</div></div>
+    <div class="kpi" style="display:none" class="desktop-only"><div class="kpi-label">Erschienen</div><div class="kpi-val" style="color:var(--teal)">${c.Erschienen}</div></div>
   `;
-  document.getElementById('sidebar-stats').innerHTML = `
+  document.getElementById('sidebar-stats').innerHTML=`
     <div class="ss-label">Überblick</div>
     ${[['Eingeladen','var(--blue)'],['Zugesagt','var(--green)'],['Erschienen','var(--teal)'],['Abgesagt','var(--red)'],['Warteliste','var(--amber)']].map(([s,col])=>`
     <div class="ss-row"><span><span class="ss-dot" style="background:${col}"></span>${s}</span><span style="color:${col};font-weight:500">${c[s]||0}</span></div>`).join('')}
   `;
 }
 
-function getFiltered() {
-  const q = document.getElementById('search').value.toLowerCase();
-  const fs = document.getElementById('filterStatus').value;
-  return people.filter(p =>
-    (!q || p.name.toLowerCase().includes(q) || (p.email||'').toLowerCase().includes(q) || (p.team||'').toLowerCase().includes(q)) &&
-    (!fs || p.status === fs)
-  );
+function getFiltered(){
+  const q=document.getElementById('search').value.toLowerCase();
+  const fs=document.getElementById('filterStatus').value;
+  return people.filter(p=>(!q||p.name.toLowerCase().includes(q)||(p.email||'').toLowerCase().includes(q)||(p.team||'').toLowerCase().includes(q))&&(!fs||p.status===fs));
 }
-function goPage1() { page = 1; }
+function goPage1(){page=1;}
 
-function render() {
-  const filtered = getFiltered();
-  const total = filtered.length;
-  const pages = Math.max(1, Math.ceil(total/pageSize));
-  if (page > pages) page = pages;
-  const slice = filtered.slice((page-1)*pageSize, page*pageSize);
-  const sel = people.filter(p => p.sel);
-  document.getElementById('bulk-bar').classList.toggle('show', sel.length > 0);
-  if (sel.length) document.getElementById('bulk-count').textContent = sel.length + ' ausgewählt';
+function render(){
+  const filtered=getFiltered();
+  const total=filtered.length;
+  const pages=Math.max(1,Math.ceil(total/pageSize));
+  if(page>pages)page=pages;
+  const slice=filtered.slice((page-1)*pageSize,page*pageSize);
+  const sel=people.filter(p=>p.sel);
+  document.getElementById('bulk-bar').classList.toggle('show',sel.length>0);
+  if(sel.length)document.getElementById('bulk-count').textContent=sel.length+' ausgewählt';
 
-  const tb = document.getElementById('tbody');
-  if (!slice.length) {
-    tb.innerHTML = '<tr><td colspan="7"><div class="empty-state">Keine Einträge gefunden</div></td></tr>';
-  } else {
-    tb.innerHTML = slice.map((p,idx) => {
-      const num = (page-1)*pageSize + idx + 1;
-      const sk = (p.status||'Eingeladen').toLowerCase();
-      return `<tr>
-        <td><input type="checkbox" class="chk" ${p.sel?'checked':''} onchange="toggleSel('${p.id}',this.checked)"></td>
-        <td class="td-mono">${num}</td>
-        <td><div class="td-name">${p.name}</div>${p.email?`<div class="td-mono">${p.email}</div>`:''}</td>
-        <td class="td-muted">${p.team||'—'}</td>
-        <td>
-          <select class="status-sel badge b-${sk}" onchange="changeStatus('${p.id}',this.value)">
-            ${['Eingeladen','Zugesagt','Abgesagt','Warteliste','Erschienen'].map(s=>`<option value="${s}" ${s===p.status?'selected':''}>${s}</option>`).join('')}
-          </select>
-        </td>
-        <td class="td-muted" style="max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${p.notiz||''}">${p.notiz||''}</td>
-        <td style="white-space:nowrap">
-          <button class="btn ghost sm" onclick="openEdit('${p.id}')">Edit</button>
-          <button class="btn ghost sm" style="color:var(--red)" onclick="deletePerson('${p.id}')">✕</button>
-        </td>
-      </tr>`;
-    }).join('');
-  }
+  // Desktop table
+  const tb=document.getElementById('tbody');
+  if(!slice.length){tb.innerHTML='<tr><td colspan="7"><div class="empty-state">Keine Einträge</div></td></tr>';}
+  else{tb.innerHTML=slice.map((p,idx)=>{
+    const num=(page-1)*pageSize+idx+1;
+    const sk=(p.status||'Eingeladen').toLowerCase();
+    return`<tr>
+      <td><input type="checkbox" class="chk" ${p.sel?'checked':''} onchange="toggleSel('${p.id}',this.checked)"></td>
+      <td style="font-family:'DM Mono',monospace;font-size:11px;color:var(--text3)">${num}</td>
+      <td><div class="td-name">${p.name}</div>${p.email?`<div class="td-mono">${p.email}</div>`:''}</td>
+      <td class="td-muted">${p.team||'—'}</td>
+      <td><select class="status-sel badge b-${sk}" onchange="changeStatus('${p.id}',this.value)">${['Eingeladen','Zugesagt','Abgesagt','Warteliste','Erschienen'].map(s=>`<option value="${s}" ${s===p.status?'selected':''}>${s}</option>`).join('')}</select></td>
+      <td class="td-muted" style="max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${p.notiz||''}">${p.notiz||''}</td>
+      <td style="white-space:nowrap"><button class="btn ghost sm" onclick="openEdit('${p.id}')">Edit</button><button class="btn ghost sm" style="color:var(--red)" onclick="deletePerson('${p.id}')">✕</button></td>
+    </tr>`;
+  }).join('');}
 
-  const pg = document.getElementById('paging');
-  pg.innerHTML = `<span style="font-size:12px;color:var(--text3);flex:1">${total} Personen · Seite ${page} / ${pages}</span>
+  // Mobile cards
+  const cl=document.getElementById('card-list');
+  if(!slice.length){cl.innerHTML='<div class="empty-state">Keine Einträge</div>';}
+  else{cl.innerHTML=slice.map(p=>{
+    const sk=(p.status||'Eingeladen').toLowerCase();
+    return`<div class="person-card" onclick="openEdit('${p.id}')">
+      <div class="person-card-hd">
+        <div class="person-card-name">${p.name}</div>
+        <span class="badge b-${sk}">${p.status}</span>
+      </div>
+      <div class="person-card-team">${p.team||'—'}</div>
+      ${p.email?`<div style="font-size:11px;color:var(--text3);margin-top:3px;font-family:'DM Mono',monospace">${p.email}</div>`:''}
+      ${p.notiz?`<div style="font-size:11px;color:var(--text2);margin-top:6px;padding-top:6px;border-top:1px solid var(--border)">${p.notiz}</div>`:''}
+    </div>`;
+  }).join('');}
+
+  const pg=document.getElementById('paging');
+  pg.innerHTML=`<span style="font-size:12px;color:var(--text3);flex:1">${total} Personen · ${page}/${pages}</span>
     <button class="btn sm" onclick="page=Math.max(1,page-1);render()" ${page<=1?'disabled':''}>‹</button>
     <button class="btn sm" onclick="page=Math.min(${pages},page+1);render()" ${page>=pages?'disabled':''}>›</button>`;
-
   renderStats();
 }
 
-async function changeStatus(id, val) {
-  const p = people.find(x => x.id === id);
-  if (!p) return;
-  p.status = val;
-  saveLocal();
-  render();
-  setSyncStatus('syncing', 'Speichere...');
-  await pushToSheets(p);
-}
-
-function toggleSel(id, v) { const p = people.find(x=>x.id===id); if(p){p.sel=v;render();} }
-function toggleAll(cb) { const ids = getFiltered().map(p=>p.id); people.forEach(p=>{if(ids.includes(p.id))p.sel=cb.checked}); render(); }
-function clearSel() { people.forEach(p=>p.sel=false); render(); }
-
-async function applyBulk() {
-  const s = document.getElementById('bulk-status').value;
-  if (!s) return;
-  const ids = people.filter(p=>p.sel).map(p=>p.id);
+async function changeStatus(id,val){const p=people.find(x=>x.id===id);if(!p)return;p.status=val;saveLocal();render();setSyncStatus('syncing','Speichere...');await pushToSheets(p);}
+function toggleSel(id,v){const p=people.find(x=>x.id===id);if(p){p.sel=v;render();}}
+function toggleAll(cb){const ids=getFiltered().map(p=>p.id);people.forEach(p=>{if(ids.includes(p.id))p.sel=cb.checked});render();}
+function clearSel(){people.forEach(p=>p.sel=false);render();}
+async function applyBulk(){
+  const s=document.getElementById('bulk-status').value;if(!s)return;
+  const ids=people.filter(p=>p.sel).map(p=>p.id);
   people.filter(p=>p.sel).forEach(p=>{p.status=s;p.sel=false;});
-  saveLocal(); render(); toast('Status auf "'+s+'" gesetzt');
-  if (scriptUrl) {
-    setSyncStatus('syncing','Speichere...');
-    try { await api({action:'bulkStatus',ids:JSON.stringify(ids),status:s}); setSyncStatus('ok','Gespeichert'); } catch(e) { setSyncStatus('error','Sync-Fehler'); }
-  }
+  saveLocal();render();toast('Status auf "'+s+'" gesetzt');
+  if(scriptUrl){setSyncStatus('syncing','Speichere...');try{await api({action:'bulkStatus',ids:JSON.stringify(ids),status:s});setSyncStatus('ok','Gespeichert');}catch(e){setSyncStatus('error','Fehler');}}
 }
 
-// ── MODAL ─────────────────────────────────────────────
-function openAdd() {
+function openAdd(){
   editId=null;
-  document.getElementById("modal-title").textContent="Person hinzufuegen";
-  ["name","email","tel","team","notiz"].forEach(f=>document.getElementById("f-"+f).value="");
-  document.getElementById("f-status").value="Eingeladen";
-  document.getElementById("edit-panel").style.display="block";
+  document.getElementById('modal-title').textContent='Person hinzufügen';
+  ['name','email','tel','team','notiz'].forEach(f=>document.getElementById('f-'+f).value='');
+  document.getElementById('f-status').value='Eingeladen';
+  document.getElementById('edit-panel').style.display='block';
+  document.getElementById('panel-overlay').style.display='block';
 }
-function openEdit(id) {
+function openEdit(id){
   const p=people.find(x=>String(x.id)===String(id));
-  if(!p){ alert("Nicht gefunden: "+id); return; }
+  if(!p)return;
   editId=id;
-  document.getElementById("modal-title").textContent="Bearbeiten";
-  document.getElementById("f-name").value=p.name||"";
-  document.getElementById("f-email").value=p.email||"";
-  document.getElementById("f-tel").value=p.tel||"";
-  document.getElementById("f-team").value=p.team||"";
-  document.getElementById("f-status").value=p.status||"Eingeladen";
-  document.getElementById("f-notiz").value=p.notiz||"";
-  document.getElementById("edit-panel").style.display="block";
+  document.getElementById('modal-title').textContent='Bearbeiten';
+  document.getElementById('f-name').value=p.name||'';
+  document.getElementById('f-email').value=p.email||'';
+  document.getElementById('f-tel').value=p.tel||'';
+  document.getElementById('f-team').value=p.team||'';
+  document.getElementById('f-status').value=p.status||'Eingeladen';
+  document.getElementById('f-notiz').value=p.notiz||'';
+  document.getElementById('edit-panel').style.display='block';
+  document.getElementById('panel-overlay').style.display='block';
 }
-function closeModal() {
-  document.getElementById("edit-panel").style.display="none";
+function closeModal(){
+  document.getElementById('edit-panel').style.display='none';
+  document.getElementById('panel-overlay').style.display='none';
 }
 
-async function savePerson() {
+async function savePerson(){
   const name=document.getElementById('f-name').value.trim();
   if(!name){alert('Name ist Pflichtfeld');return;}
   const obj={name,email:document.getElementById('f-email').value.trim(),tel:document.getElementById('f-tel').value.trim(),team:document.getElementById('f-team').value.trim(),status:document.getElementById('f-status').value,notiz:document.getElementById('f-notiz').value.trim()};
-  if(editId){const i=people.findIndex(x=>x.id===editId);if(i>-1)people[i]={...people[i],...obj};}
+  if(editId){const i=people.findIndex(x=>String(x.id)===String(editId));if(i>-1)people[i]={...people[i],...obj};}
   else{const id=String(nextId++);people.push({id,...obj,sel:false});obj.id=id;}
-  closeModal(); saveLocal(); render(); toast('Gespeichert');
-  const saved=people.find(x=>x.name===name);
-  if(saved) await pushToSheets(saved);
+  closeModal();saveLocal();render();toast('Gespeichert');
+  const saved=editId?people.find(x=>String(x.id)===String(editId)):people.find(x=>x.name===name&&!x.sel);
+  if(saved)await pushToSheets(saved);
 }
 
-async function deletePerson(id) {
+async function deletePerson(id){
   if(!confirm('Person wirklich entfernen?'))return;
   people=people.filter(x=>x.id!==id);
-  saveLocal(); render(); toast('Entfernt');
-  await deleteFromSheets(id);
+  saveLocal();render();toast('Entfernt');await deleteFromSheets(id);
 }
 
-// ── ABGLEICH ──────────────────────────────────────────
-async function runAbgleich() {
-  const raw=document.getElementById('csvInput').value.trim();
-  if(!raw)return;
+async function runAbgleich(){
+  const raw=document.getElementById('csvInput').value.trim();if(!raw)return;
   const entries=raw.split('\n').filter(l=>l.trim()).map(l=>{const p=l.split(/[,\t]/).map(s=>s.trim());return{name:p[0]||'',email:(p[1]||'').toLowerCase()};}).filter(e=>e.name||e.email);
   const emailMap={};people.forEach(p=>{if(p.email)emailMap[p.email.toLowerCase()]=p;});
   const updated=[],newOnes=[],already=[];
   entries.forEach(e=>{const found=emailMap[e.email];if(found){if(found.status==='Eingeladen'){found.status='Zugesagt';updated.push({...e});}else{already.push({...e,status:found.status});}}else{newOnes.push(e);}});
   for(const p of updated)await pushToSheets(p);
-  let html=`<p style="font-size:13px;font-weight:500;margin-bottom:14px">${entries.length} Einträge verarbeitet</p>`;
-  if(updated.length){html+=`<div class="divider-label" style="color:var(--green)">✓ Aktualisiert (${updated.length})</div><div style="border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:16px">`;html+=updated.map(m=>`<div class="match-row" style="padding:9px 14px"><span style="color:var(--green)">✓</span><strong>${m.name}</strong><span class="td-mono">${m.email}</span><span class="badge b-zugesagt">Zugesagt</span></div>`).join('');html+='</div>';}
-  if(newOnes.length){html+=`<div class="divider-label" style="color:var(--amber)">+ Neu (${newOnes.length})</div><div style="border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:16px">`;html+=newOnes.map((m,i)=>`<div class="match-row" style="padding:9px 14px"><span style="color:var(--amber)">+</span><strong>${m.name}</strong><span class="td-mono">${m.email}</span><button class="btn sm primary" id="ab-${i}" onclick="addFromForm('${esc(m.name)}','${esc(m.email)}','ab-${i}')">Hinzufügen</button></div>`).join('');html+='</div>';}
-  if(already.length){html+=`<div class="divider-label">– Bereits erfasst (${already.length})</div><div style="border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden">`;html+=already.map(m=>`<div class="match-row" style="padding:9px 14px"><span style="color:var(--text3)">–</span><strong>${m.name}</strong><span class="td-mono">${m.email}</span><span class="badge b-${m.status.toLowerCase()}">${m.status}</span></div>`).join('');html+='</div>';}
-  document.getElementById('abgleich-result').innerHTML=html;
-  saveLocal();render();
+  let html=`<p style="font-size:13px;font-weight:500;margin-bottom:14px">${entries.length} verarbeitet</p>`;
+  if(updated.length){html+=`<div class="divider-label" style="color:var(--green)">✓ Aktualisiert (${updated.length})</div><div style="border:1px solid var(--border);border-radius:var(--rl);overflow:hidden;margin-bottom:16px">`;html+=updated.map(m=>`<div class="match-row" style="padding:9px 14px"><span style="color:var(--green)">✓</span><strong>${m.name}</strong><span class="badge b-zugesagt">Zugesagt</span></div>`).join('');html+='</div>';}
+  if(newOnes.length){html+=`<div class="divider-label" style="color:var(--amber)">+ Neu (${newOnes.length})</div><div style="border:1px solid var(--border);border-radius:var(--rl);overflow:hidden;margin-bottom:16px">`;html+=newOnes.map((m,i)=>`<div class="match-row" style="padding:9px 14px"><span style="color:var(--amber)">+</span><strong>${m.name}</strong><span style="font-size:12px;color:var(--text2)">${m.email}</span><button class="btn sm primary" id="ab-${i}" onclick="addFromForm('${esc(m.name)}','${esc(m.email)}','ab-${i}')">Hinzufügen</button></div>`).join('');html+='</div>';}
+  if(already.length){html+=`<div class="divider-label">– Bereits erfasst (${already.length})</div><div style="border:1px solid var(--border);border-radius:var(--rl);overflow:hidden">`;html+=already.map(m=>`<div class="match-row" style="padding:9px 14px"><span style="color:var(--text3)">–</span><strong>${m.name}</strong><span class="badge b-${m.status.toLowerCase()}">${m.status}</span></div>`).join('');html+='</div>';}
+  document.getElementById('abgleich-result').innerHTML=html;saveLocal();render();
 }
 
 function esc(s){return String(s).replace(/'/g,"\\'").replace(/"/g,'\\"');}
 async function addFromForm(name,email,btnId){
-  const id=String(nextId++);
-  const p={id,name,email,tel:'',team:'',status:'Zugesagt',notiz:'via Google Forms',sel:false};
-  people.push(p);
-  const btn=document.getElementById(btnId);
-  if(btn){btn.textContent='✓ Hinzugefügt';btn.disabled=true;btn.style.background='var(--green-bg)';btn.style.color='var(--green)';}
-  saveLocal();render();toast('Hinzugefügt: '+name);
-  await pushToSheets(p);
+  const id=String(nextId++);const p={id,name,email,tel:'',team:'',status:'Zugesagt',notiz:'via Google Forms',sel:false};
+  people.push(p);const btn=document.getElementById(btnId);
+  if(btn){btn.textContent='✓';btn.disabled=true;btn.style.background='var(--green-bg)';btn.style.color='var(--green)';}
+  saveLocal();render();toast('Hinzugefügt: '+name);await pushToSheets(p);
 }
 
-// ── BULK IMPORT ───────────────────────────────────────
-async function runBulkImport() {
-  const raw=document.getElementById('bulkInput').value.trim();
-  if(!raw)return;
+async function runBulkImport(){
+  const raw=document.getElementById('bulkInput').value.trim();if(!raw)return;
   const initStatus=document.getElementById('bulk-init-status').value;
-  const existingEmails=new Set(people.map(p=>(p.email||'').toLowerCase()).filter(Boolean));
-  const lines=raw.split('\n').filter(l=>l.trim());
-  let added=0,skipped=0;const newPeople=[];
-  lines.forEach(l=>{const p=l.split(/[,\t]/).map(s=>s.trim());const name=p[0]||'';const email=(p[1]||'').toLowerCase();const team=p[2]||'';if(!name)return;if(email&&existingEmails.has(email)){skipped++;return;}const id=String(nextId++);const obj={id,name,email,tel:'',team,status:initStatus,notiz:'',sel:false};people.push(obj);newPeople.push(obj);if(email)existingEmails.add(email);added++;});
-  document.getElementById('import-result').innerHTML=`<span style="color:var(--green)">✓ ${added} importiert</span>${skipped?` · <span style="color:var(--amber)">${skipped} Duplikate übersprungen</span>`:''}`;
-  document.getElementById('bulkInput').value='';
-  saveLocal();render();toast(added+' importiert');
-  for(const p of newPeople)await pushToSheets(p);
+  const existing=new Set(people.map(p=>(p.email||'').toLowerCase()).filter(Boolean));
+  const lines=raw.split('\n').filter(l=>l.trim());let added=0,skipped=0;const newP=[];
+  lines.forEach(l=>{const p=l.split(/[,\t]/).map(s=>s.trim());const name=p[0]||'';const email=(p[1]||'').toLowerCase();const team=p[2]||'';if(!name)return;if(email&&existing.has(email)){skipped++;return;}const id=String(nextId++);const obj={id,name,email,tel:'',team,status:initStatus,notiz:'',sel:false};people.push(obj);newP.push(obj);if(email)existing.add(email);added++;});
+  document.getElementById('import-result').innerHTML=`<span style="color:var(--green)">✓ ${added} importiert</span>${skipped?` · <span style="color:var(--amber)">${skipped} Duplikate</span>`:''}`;
+  document.getElementById('bulkInput').value='';saveLocal();render();toast(added+' importiert');
+  for(const p of newP)await pushToSheets(p);
 }
 
-// ── EXPORT ────────────────────────────────────────────
 function exportCSV(){
   const rows=[['Name','E-Mail','Telefon','Firma/Rolle','Status','Notiz'],...people.map(p=>[p.name,p.email||'',p.tel||'',p.team||'',p.status,p.notiz||''])];
   const csv=rows.map(r=>r.map(c=>'"'+String(c||'').replace(/"/g,'""')+'"').join(',')).join('\n');
-  const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,\uFEFF'+encodeURIComponent(csv);a.download='worksout-afterwork.csv';a.click();
-  toast('CSV exportiert');
+  const a=document.createElement('a');a.href='data:text/csv;charset=utf-8,\uFEFF'+encodeURIComponent(csv);a.download='worksout.csv';a.click();toast('CSV exportiert');
 }
 
-// ── TOAST ─────────────────────────────────────────────
 let toastTimer;
 function toast(msg){const el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),2400);}
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
