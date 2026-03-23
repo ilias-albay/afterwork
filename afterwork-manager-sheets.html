@@ -242,28 +242,23 @@ tbody tr:hover td{background:rgba(255,255,255,.02)}
   </div>
 </div>
 
-<!-- Modal -->
-<div class="overlay" id="overlay">
-  <div class="modal">
-    <div class="modal-hd">
-      <h3 id="modal-title">Person hinzufügen</h3>
-      <button class="btn ghost sm" onclick="closeModal()">✕</button>
-    </div>
-    <div class="form-row"><label>Name *</label><input type="text" id="f-name"></div>
-    <div class="form-row"><label>E-Mail</label><input type="email" id="f-email"></div>
-    <div class="form-row"><label>Telefon</label><input type="tel" id="f-tel"></div>
-    <div class="form-row"><label>Firma / Rolle</label><input type="text" id="f-team"></div>
-    <div class="form-row"><label>Status</label>
-      <select id="f-status">
-        <option>Eingeladen</option><option>Zugesagt</option>
-        <option>Abgesagt</option><option>Warteliste</option><option>Erschienen</option>
-      </select>
-    </div>
-    <div class="form-row"><label>Notiz</label><input type="text" id="f-notiz"></div>
-    <div class="modal-btns">
-      <button class="btn" onclick="closeModal()">Abbrechen</button>
-      <button class="btn primary" onclick="savePerson()">Speichern</button>
-    </div>
+<!-- Edit Panel (inline, kein Modal) -->
+<div id="edit-panel" style="display:none;position:fixed;top:0;right:0;width:340px;height:100vh;background:#181818;border-left:1px solid rgba(255,255,255,.14);z-index:9999;padding:24px;overflow-y:auto;box-shadow:-4px 0 20px rgba(0,0,0,.5)">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px">
+    <h3 id="modal-title" style="font-size:15px;font-weight:500;color:#f0f0f0">Bearbeiten</h3>
+    <button onclick="closeModal()" style="background:none;border:none;color:#888;cursor:pointer;font-size:18px;padding:4px 8px">✕</button>
+  </div>
+  <div style="margin-bottom:12px"><label style="display:block;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px">Name *</label><input type="text" id="f-name" style="width:100%"></div>
+  <div style="margin-bottom:12px"><label style="display:block;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px">E-Mail</label><input type="email" id="f-email" style="width:100%"></div>
+  <div style="margin-bottom:12px"><label style="display:block;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px">Telefon</label><input type="tel" id="f-tel" style="width:100%"></div>
+  <div style="margin-bottom:12px"><label style="display:block;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px">Firma / Rolle</label><input type="text" id="f-team" style="width:100%"></div>
+  <div style="margin-bottom:12px"><label style="display:block;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px">Status</label>
+    <select id="f-status" style="width:100%"><option>Eingeladen</option><option>Zugesagt</option><option>Abgesagt</option><option>Warteliste</option><option>Erschienen</option></select>
+  </div>
+  <div style="margin-bottom:20px"><label style="display:block;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px">Notiz</label><input type="text" id="f-notiz" style="width:100%"></div>
+  <div style="display:flex;gap:8px">
+    <button onclick="closeModal()" style="flex:1;padding:9px;border-radius:8px;border:1px solid rgba(255,255,255,.14);background:#222;color:#888;cursor:pointer;font-size:13px">Abbrechen</button>
+    <button onclick="savePerson()" style="flex:1;padding:9px;border-radius:8px;border:none;background:#c8f06a;color:#0f0f0f;cursor:pointer;font-size:13px;font-weight:500">Speichern</button>
   </div>
 </div>
 
@@ -611,13 +606,11 @@ function openAdd() {
   document.getElementById("modal-title").textContent="Person hinzufuegen";
   ["name","email","tel","team","notiz"].forEach(f=>document.getElementById("f-"+f).value="");
   document.getElementById("f-status").value="Eingeladen";
-  const ov = document.getElementById("overlay");
-  ov.style.display = "flex";
-  ov.classList.add("open");
+  document.getElementById("edit-panel").style.display="block";
 }
 function openEdit(id) {
   const p=people.find(x=>x.id===id);
-  if(!p){ alert("Person nicht gefunden: "+id); return; }
+  if(!p){ alert("Nicht gefunden: "+id); return; }
   editId=id;
   document.getElementById("modal-title").textContent="Bearbeiten";
   document.getElementById("f-name").value=p.name||"";
@@ -626,14 +619,10 @@ function openEdit(id) {
   document.getElementById("f-team").value=p.team||"";
   document.getElementById("f-status").value=p.status||"Eingeladen";
   document.getElementById("f-notiz").value=p.notiz||"";
-  const ov = document.getElementById("overlay");
-  ov.style.display = "flex";
-  ov.classList.add("open");
+  document.getElementById("edit-panel").style.display="block";
 }
 function closeModal() {
-  const ov = document.getElementById("overlay");
-  ov.style.display = "none";
-  ov.classList.remove("open");
+  document.getElementById("edit-panel").style.display="none";
 }
 
 async function savePerson() {
