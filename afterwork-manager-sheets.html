@@ -397,7 +397,7 @@ async function pullFromSheets() {
     const res = await api({ action: 'getAll' });
     if (res.error) throw new Error(res.error);
     if (res.people && res.people.length > 0) {
-      people = res.people.map(p => ({...p, sel: false}));
+      people = res.people.map(p => ({...p, id: String(p.id), sel: false}));
       nextId = Math.max(...people.map(p => parseInt(p.id)||0), 0) + 1;
       saveLocal();
       setSyncStatus('ok', 'Verbunden');
