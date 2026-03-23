@@ -346,7 +346,7 @@ const STARTER = [
 ];
 
 // ── STATE ────────────────────────────────────────────
-let scriptUrl = localStorage.getItem(LS_URL) || '';
+let scriptUrl = localStorage.getItem(LS_URL) || 'https://script.google.com/macros/s/AKfycbxJozTimDP0uGxH6YXtUaPiA4XLQ_8lS3oTNEUA4B3mBNIX2bf9kpIa7Yk6ukwv9oRccg/exec';
 let people = [];
 let nextId = 1;
 let editId = null, page = 1, pageSize = 20;
@@ -363,11 +363,28 @@ function saveLocal() {
   try { localStorage.setItem(LS_KEY, JSON.stringify(people)); } catch(e) {}
 }
 
-// ── SHEETS API ────────────────────────────────────────
+// ── SHEETS API (JSONP - umgeht CORS) ─────────────────
 function api(params) {
-  if (!scriptUrl) return Promise.reject('no-url');
-  const url = scriptUrl + '?' + new URLSearchParams(params).toString();
-  return fetch(url).then(r => r.json());
+  if (!scriptUrl) return Promise.reject("no-url");
+  return new Promise(function(resolve, reject) {
+    const cbName = "cb_" + Date.now();
+    const script = document.createElement("script");
+    const timeout = setTimeout(function() {
+      delete window[cbName];
+      if (document.body.contains(script)) document.body.removeChild(script);
+      reject(new Error("Timeout"));
+    }, 10000);
+    window[cbName] = function(data) {
+      clearTimeout(timeout);
+      delete window[cbName];
+      if (document.body.contains(script)) document.body.removeChild(script);
+      resolve(data);
+    };
+    params.callback = cbName;
+    script.src = scriptUrl + "?" + new URLSearchParams(params).toString();
+    script.onerror = function() { clearTimeout(timeout); reject(new Error("Script error")); };
+    document.body.appendChild(script);
+  });
 }
 
 function setSyncStatus(state, label) {
