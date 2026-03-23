@@ -74,7 +74,7 @@ tbody tr:hover td{background:rgba(255,255,255,.02)}
 .status-sel{background:none;border:none;cursor:pointer;font-size:11px;font-weight:500;padding:3px 6px;border-radius:20px;outline:none}
 .bulk-bar{display:none;align-items:center;gap:10px;padding:10px 14px;background:var(--accent-dim);border:1px solid rgba(200,240,106,.2);border-radius:var(--radius);margin-bottom:12px;font-size:13px}
 .bulk-bar.show{display:flex}
-.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;align-items:center;justify-content:center}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;align-items:flex-start;justify-content:center;padding-top:60px;overflow-y:auto}
 .overlay.open{display:flex}
 .modal{background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius-lg);padding:24px;width:420px;max-width:95vw;max-height:90vh;overflow-y:auto}
 .modal-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
@@ -434,15 +434,17 @@ async function deleteFromSheets(id) {
 }
 
 async function pushLocalToSheets() {
-  if (!scriptUrl) { toast('Keine Script-URL hinterlegt'); return; }
-  setSyncStatus('syncing', 'Hochladen...');
-  let ok = 0;
-  for (const p of people) {
-    try { await api({ action: 'save', person: JSON.stringify(p) }); ok++; } catch(e) {}
+  if (!scriptUrl) { toast("Keine Script-URL hinterlegt"); return; }
+  setSyncStatus("syncing", "Hochladen...");
+  try {
+    const res = await api({ action: "saveAll", people: JSON.stringify(people) });
+    setSyncStatus("ok", "Verbunden");
+    toast(people.length + " Personen ins Sheet geladen");
+    document.getElementById("sync-result").textContent = people.length + " Personen wurden ins Sheet geschrieben.";
+  } catch(e) {
+    setSyncStatus("error", "Fehler");
+    toast("Fehler: " + e.message);
   }
-  setSyncStatus('ok', 'Verbunden');
-  toast(ok + ' Personen ins Sheet geladen');
-  document.getElementById('sync-result').textContent = ok + ' Personen wurden ins Sheet geschrieben.';
 }
 
 // ── SETUP ─────────────────────────────────────────────
